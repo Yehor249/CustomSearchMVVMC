@@ -7,16 +7,15 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class SearchViewController: UIViewController, Storyboardable {
     
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var labelStatus: UILabel!
-    var viewModel = ViewModel()
     
-    @IBAction func textFieldPressed(_ sender: UITextField) {
-    }
+    var viewModel: SearchViewModel?
+    var coordinator: AppCoordinator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,19 +44,19 @@ class ViewController: UIViewController {
     }
     
     func bindViewModel() {
-        viewModel.statusText.bind { [weak self] statusText in
+        viewModel?.statusText.bind { [weak self] statusText in
             DispatchQueue.main.async {
                 self?.labelStatus.text = statusText
             }
         }
         
-        viewModel.filteredBrands.bind { [weak self] _ in
+        viewModel?.filteredBrands.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
         }
         
-        viewModel.searchHistory.bind { [weak self] _ in
+        viewModel?.searchHistory.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()
             }
@@ -66,7 +65,7 @@ class ViewController: UIViewController {
     
     @objc func searchTextChanged(_ sender: UITextField) {
         let searchText = sender.text ?? ""
-        viewModel.searchTextFieldDidChange(searchText)
+        viewModel?.searchTextFieldDidChange(searchText)
         
         // Управление видимостью tableView и collectionView
         if searchText.isEmpty {
@@ -80,52 +79,49 @@ class ViewController: UIViewController {
 }
 
 // MARK: - UITableViewDataSource
-extension ViewController: UITableViewDataSource, UITableViewDelegate {
+extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.filteredBrands.value.count
+        return (viewModel?.filteredBrands.value.count)!
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCustomCell", for: indexPath) as! TableViewCell
         
-        let brand = viewModel.filteredBrands.value[indexPath.row]
+        let brand = viewModel?.filteredBrands.value[indexPath.row]
         
-        if let name = brand.name, let searchText = textField.text, !searchText.isEmpty {
-            cell.label.attributedText = viewModel.getHighlightedText(for: name, with: searchText)
+        if let name = brand?.name, let searchText = textField.text, !searchText.isEmpty {
+            cell.label.attributedText = viewModel?.getHighlightedText(for: name, with: searchText)
         } else {
-            cell.label.text = brand.name
+            cell.label.text = brand?.name
         }
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedBrand = viewModel.filteredBrands.value[indexPath.row]
+        let selectedBrand = viewModel?.filteredBrands.value[indexPath.row]
         
-        if let brandName = selectedBrand.name {
-            print("Selected brand: \(brandName)")
-            viewModel.addToSearchHistory(brandName)
+        if let brandName = selectedBrand?.name {
+            viewModel?.addToSearchHistory(brandName)
             textField.text = brandName
         }
         
-        tableView.isHidden = true
-        collectionView.isHidden = false
+        coordinator?.showMain(brandNmae: selectedBrand?.name ?? "")
     }
     
 }
 
 // MARK: - UICollectionViewDataSource
 
-extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.searchHistory.value.count
+        return (viewModel?.searchHistory.value.count)!
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewCustomCell", for: indexPath) as! CollectionViewCell
         
-        let historyItem = viewModel.searchHistory.value[indexPath.item]
+        let historyItem = viewModel?.searchHistory.value[indexPath.item]
         cell.label.text = historyItem // Обновите UI элемента, если он отличается
         
         return cell
@@ -136,7 +132,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     }
 }
 
-extension ViewController: UITextFieldDelegate {
+extension SearchViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         tableView.isHidden = false
     }

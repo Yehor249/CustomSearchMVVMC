@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-class ViewModel {
+class SearchViewModel {
     var filteredBrands: Dynamic<[Brand]> = Dynamic([])
-    var searchHistory: Dynamic<[String]> = Dynamic([]) // Массив для истории поиска
+    var searchHistory: Dynamic<[String]> = Dynamic([])
     
     private let allBrands = Brand.allBrands
     
