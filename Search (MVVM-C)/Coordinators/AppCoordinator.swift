@@ -9,7 +9,6 @@ import UIKit
 
 class AppCoordinator: Coordinator {
     var navigationController: UINavigationController
-    var cellPressed: Bool = false
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController

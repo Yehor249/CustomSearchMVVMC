@@ -59,7 +59,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="dQ6-KH-V4w" firstAttribute="leading" secondItem="OPF-Fy-IDf" secondAttribute="leading" constant="14" id="3UJ-pN-tIB"/>
                                     <constraint firstAttribute="trailing" secondItem="dQ6-KH-V4w" secondAttribute="trailing" constant="14" id="Al0-Ex-pDb"/>
@@ -69,7 +69,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Chb-c8-fe5">
-                                <rect key="frame" x="0.0" y="195" width="393" height="525"/>
+                                <rect key="frame" x="0.0" y="195" width="393" height="623"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="pD5-dK-PTK">
                                     <size key="itemSize" width="128" height="128"/>
@@ -134,46 +134,44 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="RIE-Nl-sYN">
-                                <rect key="frame" x="0.0" y="145" width="393" height="575"/>
+                                <rect key="frame" x="0.0" y="145" width="393" height="673"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="xbh-OX-Nsc" id="N1T-ZI-mho"/>
                                     <outlet property="delegate" destination="xbh-OX-Nsc" id="rBm-1e-pf6"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AF7-h0-tyg">
-                                <rect key="frame" x="0.0" y="720" width="393" height="98"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GHg-SL-fJM">
+                                <rect key="frame" x="0.0" y="818" width="393" height="34"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LpN-qS-rSb"/>
                         <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                         <constraints>
-                            <constraint firstItem="LpN-qS-rSb" firstAttribute="trailing" secondItem="AF7-h0-tyg" secondAttribute="trailing" id="2dT-XG-0zG"/>
+                            <constraint firstAttribute="bottom" secondItem="GHg-SL-fJM" secondAttribute="bottom" id="59p-i1-yVE"/>
                             <constraint firstItem="7gV-Mj-h21" firstAttribute="leading" secondItem="LpN-qS-rSb" secondAttribute="leading" id="5QJ-CV-M80"/>
                             <constraint firstItem="LpN-qS-rSb" firstAttribute="trailing" secondItem="OPF-Fy-IDf" secondAttribute="trailing" id="8Cw-hc-yvW"/>
                             <constraint firstItem="Chb-c8-fe5" firstAttribute="top" secondItem="7gV-Mj-h21" secondAttribute="bottom" id="DoN-xa-Yd6"/>
                             <constraint firstItem="Chb-c8-fe5" firstAttribute="leading" secondItem="LpN-qS-rSb" secondAttribute="leading" id="Eun-Kl-AR8"/>
                             <constraint firstItem="OPF-Fy-IDf" firstAttribute="leading" secondItem="LpN-qS-rSb" secondAttribute="leading" id="HcZ-g2-0Zg"/>
                             <constraint firstItem="LpN-qS-rSb" firstAttribute="trailing" secondItem="7gV-Mj-h21" secondAttribute="trailing" id="JUf-ta-qla"/>
-                            <constraint firstItem="AF7-h0-tyg" firstAttribute="leading" secondItem="LpN-qS-rSb" secondAttribute="leading" id="LGT-7T-oyi"/>
-                            <constraint firstItem="LpN-qS-rSb" firstAttribute="bottom" secondItem="Chb-c8-fe5" secondAttribute="bottom" constant="98" id="Ltx-jw-lBG"/>
-                            <constraint firstItem="LpN-qS-rSb" firstAttribute="bottom" secondItem="RIE-Nl-sYN" secondAttribute="bottom" constant="98" id="PVm-pA-0Az"/>
+                            <constraint firstItem="LpN-qS-rSb" firstAttribute="bottom" secondItem="Chb-c8-fe5" secondAttribute="bottom" id="Ltx-jw-lBG"/>
+                            <constraint firstAttribute="trailing" secondItem="GHg-SL-fJM" secondAttribute="trailing" id="N87-x5-4xE"/>
+                            <constraint firstItem="GHg-SL-fJM" firstAttribute="top" secondItem="RIE-Nl-sYN" secondAttribute="bottom" id="Oys-jM-ZJH"/>
+                            <constraint firstItem="LpN-qS-rSb" firstAttribute="bottom" secondItem="RIE-Nl-sYN" secondAttribute="bottom" id="PVm-pA-0Az"/>
                             <constraint firstItem="RIE-Nl-sYN" firstAttribute="trailing" secondItem="LpN-qS-rSb" secondAttribute="trailing" id="RSd-uW-Yfv"/>
-                            <constraint firstItem="LpN-qS-rSb" firstAttribute="bottom" secondItem="AF7-h0-tyg" secondAttribute="bottom" id="TXr-3G-Hc1"/>
                             <constraint firstItem="OPF-Fy-IDf" firstAttribute="top" secondItem="LpN-qS-rSb" secondAttribute="top" id="YXk-AC-fee"/>
                             <constraint firstItem="RIE-Nl-sYN" firstAttribute="leading" secondItem="LpN-qS-rSb" secondAttribute="leading" id="Zk9-XK-dhQ"/>
+                            <constraint firstItem="GHg-SL-fJM" firstAttribute="leading" secondItem="LX0-o1-NYk" secondAttribute="leading" id="det-NR-K84"/>
                             <constraint firstItem="7gV-Mj-h21" firstAttribute="top" secondItem="OPF-Fy-IDf" secondAttribute="bottom" id="f15-3i-UzS"/>
-                            <constraint firstItem="AF7-h0-tyg" firstAttribute="top" secondItem="Chb-c8-fe5" secondAttribute="bottom" id="hA7-Zo-2ZY"/>
                             <constraint firstItem="RIE-Nl-sYN" firstAttribute="top" secondItem="OPF-Fy-IDf" secondAttribute="bottom" id="svS-sE-fuW"/>
                             <constraint firstItem="LpN-qS-rSb" firstAttribute="trailing" secondItem="Chb-c8-fe5" secondAttribute="trailing" id="vm0-4g-uJY"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="Chb-c8-fe5" id="VVM-1p-BMY"/>
-                        <outlet property="labelStatus" destination="AF7-h0-tyg" id="OKw-3z-1a0"/>
+                        <outlet property="searchFieldView" destination="dQ6-KH-V4w" id="lbd-GO-I9R"/>
                         <outlet property="tableView" destination="RIE-Nl-sYN" id="OlP-E2-T95"/>
                         <outlet property="textField" destination="djq-33-Ffw" id="g0d-kF-U4U"/>
                     </connections>
@@ -239,7 +237,7 @@
         <!--Detail View Controller-->
         <scene sceneID="jb8-XJ-YIP">
             <objects>
-                <viewController storyboardIdentifier="DetailViewController" id="PYG-nu-i4e" customClass="DetailViewController" customModule="My_App__MVVM_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" id="PYG-nu-i4e" customClass="DetailViewController" customModule="Search__MVVM_C_" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7w5-Id-qRR">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -9,10 +9,11 @@ import UIKit
 
 class SearchViewController: UIViewController, Storyboardable {
     
+    @IBOutlet weak var searchFieldView: UIView!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var labelStatus: UILabel!
+    
     
     var viewModel: SearchViewModel?
     var coordinator: AppCoordinator?
@@ -20,36 +21,27 @@ class SearchViewController: UIViewController, Storyboardable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Настройка делегатов и dataSource
-        tableView.dataSource = self
-        collectionView.dataSource = self
-        textField.delegate = self
-        
         let tableNib = UINib(nibName: "TableViewCell", bundle: nil)
         tableView.register(tableNib, forCellReuseIdentifier: "tableViewCustomCell")
         
         let collectionNib = UINib(nibName: "CollectionViewCell", bundle: nil)
         collectionView.register(collectionNib, forCellWithReuseIdentifier: "collectionViewCustomCell")
         
+        searchFieldView.layer.cornerRadius = 6
+        searchFieldView.layer.shadowOpacity = 0.5
+        searchFieldView.layer.shadowOffset = .zero
+        
         
         // Настройка текстового поля
         textField.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
         
-        // Привязка ViewModel
         bindViewModel()
         
         tableView.rowHeight = 60
-        
         tableView.isHidden = true
     }
     
     func bindViewModel() {
-        viewModel?.statusText.bind { [weak self] statusText in
-            DispatchQueue.main.async {
-                self?.labelStatus.text = statusText
-            }
-        }
-        
         viewModel?.filteredBrands.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.tableView.reloadData()

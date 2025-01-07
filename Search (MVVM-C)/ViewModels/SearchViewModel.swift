@@ -14,8 +14,6 @@ class SearchViewModel {
     
     private let allBrands = Brand.allBrands
     
-    var statusText: Dynamic<String> = Dynamic("Start typing to search...")
-    
     init() {
         filteredBrands.value = allBrands
         searchHistory.value = []
@@ -24,10 +22,8 @@ class SearchViewModel {
     func searchTextFieldDidChange(_ searchText: String) {
         if searchText.isEmpty {
             filteredBrands.value = allBrands
-            statusText.value = "Start typing to search..."
         } else {
             filteredBrands.value = allBrands.filter { $0.name?.lowercased().contains(searchText.lowercased()) ?? false }
-            statusText.value = filteredBrands.value.isEmpty ? "No results found" : "Showing results for '\(searchText)'"
         }
     }
     
